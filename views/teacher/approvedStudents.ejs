@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Approved Students</title>
+
+<style>
+
+body{
+    font-family:Arial;
+    padding:20px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    margin-bottom:20px;
+    border-radius:10px;
+    box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+img{
+    width:200px;
+    height:200px;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2>Approved Students</h2>
+
+<% students.forEach(student=>{ %>
+
+<div class="card">
+
+<h3><%= student.name %></h3>
+
+<p>
+ERP:
+<%= student.erp_id %>
+</p>
+
+<img
+src="<%= student.photo_url %>"
+>
+
+</div>
+
+<% }) %>
+
+</body>
+</html>

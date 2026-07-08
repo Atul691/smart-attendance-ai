@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Student Details</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f4f6f9;
+padding:30px;
+}
+
+.card{
+max-width:700px;
+margin:auto;
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+img{
+width:250px;
+height:250px;
+object-fit:cover;
+border-radius:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<h2><%= student.name %></h2>
+
+<img
+src="<%= student.photo_url %>"
+alt="Student Image"
+>
+
+<p><strong>ERP ID:</strong> <%= student.erp_id %></p>
+<p><strong>Email:</strong> <%= student.email %></p>
+<p><strong>Department:</strong> <%= student.department %></p>
+<p><strong>Semester:</strong> <%= student.semester %></p>
+<p><strong>Status:</strong> <%= student.approval_status %></p>
+
+</div>
+
+</body>
+</html>

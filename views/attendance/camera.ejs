@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>AI Face Attendance System</title>
+
+    <style>
+
+        body{
+            font-family: Arial, sans-serif;
+            text-align:center;
+            background:#f5f5f5;
+            margin:30px;
+        }
+
+        h2{
+            color:#333;
+        }
+
+        #video-container{
+
+            position:relative;
+            width:640px;
+            height:480px;
+            margin:auto;
+
+            border:3px solid #333;
+            border-radius:10px;
+
+            overflow:hidden;
+
+            background:white;
+
+        }
+
+        #video{
+
+            position:absolute;
+            top:0;
+            left:0;
+
+        }
+
+     #video-container canvas{
+
+    position:absolute;
+    top:0;
+    left:0;
+
+}
+        #status{
+
+            margin:20px auto;
+
+            font-size:28px;
+            font-weight:bold;
+
+            color:green;
+
+            min-height:35px;
+
+        }
+
+        #captureBtn{
+
+            margin-top:20px;
+
+            padding:12px 25px;
+
+            font-size:18px;
+
+            background:#28a745;
+
+            color:white;
+
+            border:none;
+
+            border-radius:8px;
+
+            cursor:pointer;
+
+            transition:0.3s;
+
+        }
+
+        #captureBtn:hover{
+
+            background:#1d7f34;
+
+        }
+
+        table{
+
+            margin:auto;
+            width:80%;
+            border-collapse:collapse;
+            background:white;
+
+        }
+
+        table th{
+
+            background:#28a745;
+            color:white;
+            padding:10px;
+
+        }
+
+        table td{
+
+            padding:10px;
+            border:1px solid #ddd;
+
+        }
+
+        /* ================= Dashboard Cards ================= */
+
+        .card{
+
+            width:220px;
+
+            background:white;
+
+            padding:20px;
+
+            border-radius:12px;
+
+            box-shadow:0 0 10px rgba(0,0,0,.15);
+
+            text-align:center;
+
+        }
+
+        .card h3{
+
+            margin:0;
+
+            color:#555;
+
+        }
+
+        .card h1{
+
+            margin-top:10px;
+
+            color:#28a745;
+
+            font-size:35px;
+
+        }
+        /* ================= Charts ================= */
+
+#attendancePie,
+#attendanceBar{
+
+    position:static !important;
+
+    width:100% !important;
+
+    height:320px !important;
+
+}
+
+    </style>
+
+</head>
+
+<body>
+
+    <h2>🎓 AI Face Attendance System</h2>
+    <div id="liveClock"
+style="
+font-size:22px;
+font-weight:bold;
+color:#444;
+margin-bottom:20px;
+">
+Loading...
+</div>
+
+    <div id="video-container">
+
+        <video
+            id="video"
+            width="640"
+            height="480"
+            autoplay
+            muted
+        ></video>
+
+    </div>
+
+    <!-- Status -->
+
+    <div id="status">
+
+    Waiting for Face...
+
+</div>
+
+<button id="captureBtn">
+
+    📸 Capture Face
+
+</button>
+    <hr>
+
+    <!-- ================= Live Dashboard ================= -->
+
+    <h2>📊 Live Dashboard</h2>
+
+    <div
+        id="dashboard"
+        style="
+            display:flex;
+            justify-content:center;
+            gap:20px;
+            flex-wrap:wrap;
+            margin-bottom:30px;
+        ">
+
+        <div class="card">
+
+            <h3>Total Students</h3>
+
+            <h1 id="totalStudents">0</h1>
+
+        </div>
+
+        <div class="card">
+
+            <h3>Present Today</h3>
+
+            <h1 id="presentToday">0</h1>
+
+        </div>
+
+        <div class="card">
+
+            <h3>Absent Today</h3>
+
+            <h1 id="absentToday">0</h1>
+
+        </div>
+
+        <div class="card">
+
+            <h3>Attendance %</h3>
+
+            <h1 id="attendancePercentage">0%</h1>
+
+        </div>
+
+    </div>
+
+    <hr>
+    <hr>
+
+<h2>📈 Live Attendance Analytics</h2>
+
+<div
+style="
+display:flex;
+justify-content:center;
+gap:40px;
+flex-wrap:wrap;
+margin-bottom:40px;
+">
+<div class="card" style="width:500px;">
+
+    <h3>Attendance Bar Chart</h3>
+
+    <canvas id="attendanceBar"></canvas>
+
+</div>
+
+<div class="card" style="width:400px;">
+
+<h3>Attendance Pie Chart</h3>
+
+<canvas id="attendancePie"></canvas>
+
+</div>
+</div>
+
+    <h2>Today's Attendance</h2>
+    <div style="margin:20px;">
+
+<input
+id="searchAttendance"
+type="text"
+placeholder="🔍 Search by Name or ERP ID..."
+style="
+width:350px;
+padding:12px;
+font-size:16px;
+border:2px solid #28a745;
+border-radius:8px;
+outline:none;
+">
+
+</div>
+
+    <table id="attendanceTable">
+
+        <thead>
+
+            <tr>
+
+<th>Name</th>
+
+<th>ERP ID</th>
+
+<th>Time</th>
+
+<th>Status</th>
+
+</tr>
+
+        </thead>
+
+        <tbody>
+
+        </tbody>
+
+    </table>
+
+    <!-- Face API -->
+
+    <script src="https://unpkg.com/face-api.js@0.22.2/dist/face-api.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Face Recognition -->
+
+    <script src="/js/face-recognition.js"></script>
+
+</body>
+
+</html>
